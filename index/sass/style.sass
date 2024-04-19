@@ -1,0 +1,30 @@
+*
+    font-family: Roboto, sans-serif
+
+.button
+    position: relative
+    width: 200px
+    height: 70px
+    .button_text
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 200px
+        height: 70px
+        border: 4px solid #FF8A00
+        font-weight: 700
+        font-size: 18px
+        color: white
+    .button_blur
+        position: absolute
+        top: 0
+        width: 200px
+        height: 70px
+        border: 4px solid #FF8A00
+        cursor: pointer
+        transition: .3s all
+        &:hover
+            filter: blur(5px)
+            transition: .3s all
+
+@import "index"

@@ -1,0 +1,157 @@
+body
+    background: url(../img/index_theme.png) no-repeat center center fixed #000
+    background-size: cover
+    
+.menu
+    .container
+        display: flex
+        justify-content: center
+        align-items: center
+        gap: 250px
+        height: 100vh
+        .menu_info
+            .logo
+                display: flex
+                align-items: center
+                width: 430px
+                height: 60px
+                margin-bottom: 20px
+                img
+                    width: 60px
+                    height: 60px
+                .corp_name
+                    width: 140px
+                    height: 36px
+                    margin-left: 20px
+                    color: white
+                    font-weight: 900
+                    font-size: 15px
+                    span
+                        padding-left: 40px
+                        color: #FFCDA9
+            h1
+                width: 470px
+                height: 106px
+                font-weight: 700
+                font-size: 40px
+                color: white
+            h2
+                width: 545px
+                height: 66px
+                font-weight: 300
+                font-size: 17px
+                color: white
+
+        .buttons_list
+            position: relative
+            width: 300px
+            height: 286px
+            .menu_button
+                display: flex
+                justify-content: center
+                align-items: center
+                width: 300px
+                height: 100px
+                border: 4px solid white
+                font-weight: 700
+                font-size: 17px
+                color: white
+            .loginButton, .questsButton
+                position: absolute
+                width: 300px
+                height: 100px
+                border: 4px solid white
+                cursor: pointer
+                transition: .3s all
+                &:hover
+                    filter: blur(5px)
+                    transition: .3s all
+            .loginButton
+                top: 0
+            .questsButton
+                bottom: 0
+            .orText
+                margin: 30px 0
+                font-weight: 300
+                font-size: 17px
+                color: white
+                text-align: center
+        
+.quests
+    display: none
+    .quest_block
+        display: flex
+        justify-content: right
+        align-items: center
+        gap: 250px
+        height: 100vh
+        .quest_img
+            margin-left: 100px
+            display: flex
+            align-items: flex-end
+            gap: 250px
+            height: 100vh
+            // display: none
+            img
+                width: 791px
+                height: 686px  
+        .quest_info
+            width: 600px
+            .quest_name
+                // width: 300px
+                height: 120px
+                font-weight: 300
+                font-size: 40px
+                color: white
+                span
+                    font-weight: 700
+            .quest_genre
+                font-weight: 300
+                font-size: 18px
+                color: white
+            .quest_legend
+                width: 600px
+                height: 200px
+                margin: 50px 0 20px 0
+                font-weight: 300
+                font-size: 16px
+                color: white
+            .quest_cost
+                font-weight: 300
+                font-size: 22px
+                color: white
+                span
+                    font-weight: 700
+            .button
+                margin: 30px auto
+.switch_quest
+    display: flex
+    gap: 120px
+    justify-content: center
+    align-items: center
+    .quest_circle
+        width: 12px
+        height: 12px
+        margin: 0 7px
+        border-radius: 60px
+        background-color: white
+        cursor: pointer
+        transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, background-color 0.5s ease-in-out
+        &:hover
+            background-color: #feb261
+            
+    .is_active
+        opacity: 1
+        visibility: visible
+        background-color: #ffa23f
+    .quest_arrow
+        margin: 0 10px
+        font-size: 26px
+        color: white
+        cursor: pointer
+        transition: .3s all
+        &:hover
+            color: #feb261
+            transition: .3s all
+            
+                

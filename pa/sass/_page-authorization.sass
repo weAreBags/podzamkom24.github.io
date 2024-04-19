@@ -1,0 +1,115 @@
+body
+    background-color: #303030
+
+.auth_body
+    position: absolute
+    display: flex
+    align-items: center
+    flex-direction: column
+    top: 50%
+    left: 50%
+    transform: translate(-50%,-50%)
+    width: 500px
+    height: 530px
+    background-color: #1D1D1D
+    border-radius: 60px
+    .auth_form
+        width: 402px
+    .auth_title
+        font-size: 36px
+        font-weight: 700
+        color: white
+        padding: 30px 0 30px 0
+    input
+        width: 400px
+        height: 40px
+        background-color: #303030
+        border: 1px solid white
+        padding-left: 20px
+        color: white
+        font-weight: 300
+        transition: .3s all
+        &:focus
+            border: 1px solid #FF8A00
+            transition: .3s all
+    .email_position
+        position: absolute
+        top: 110px
+    .pswd_position, .code_position
+        position: absolute
+        top: 180px
+    .reppswd_position
+        position: absolute
+        display: none
+        top: 250px
+    .regFade
+        opacity: 0
+    .input_title
+        padding: 10px 0 3px 20px
+        font-size: 12px
+        color: white
+        opacity: 0
+    .help_buttons
+        display: flex
+        gap: 205px
+        padding-top: 140px
+        color: white
+        font-size: 12px
+        font-weight: 300
+        .register_button, .lost_pswd, .login_button, .prev_button
+            transition: .3s all
+            cursor: pointer
+            &:hover
+                color: #ffaf53
+                transition: .3s all
+    .captcha
+        width: 293px
+        height: 58px
+        background-color: #fff
+        margin-top: 30px
+    .button__wrapper
+        margin: 50px auto
+
+.alert
+    position: absolute
+    top: 10px
+    left: 50%
+    transform: translate(-50%)
+    display: none
+    width: 500px
+    height: 100px
+    border-radius: 30px
+    border: 1px solid #5E7ED2
+    background-color: #202D4F
+    cursor: pointer
+    .alert_title
+        margin-top: 10px
+        font-size: 20px
+        font-weight: 700
+        color: white
+        text-align: center
+    .alert_descr
+        width: 450px
+        margin: 7px auto
+        color: white
+        font-size: 11px
+        font-weight: 300
+        text-align: center
+        span
+            color: #FFC27A
+        .helpspan
+            color: #ff4141
+    .alert_xmark
+        position: absolute
+        top: 10px
+        right: 25px
+        color: white
+        font-size: 17px
+        font-weight: 300
+        text-align: center
+        transition: .3s all
+        &:hover
+            color: #ff3a3a
+            transition: .3s all
+
+        

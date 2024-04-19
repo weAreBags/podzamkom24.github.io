@@ -1,0 +1,197 @@
+*
+    font-family: Roboto, sans-serif
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button
+    -webkit-appearance: none
+
+input:active, input:focus
+    outline: none
+
+a
+    text-decoration: none
+    color: #FFFFFF
+    &:hover
+        color: #FFFFFF
+
+ul
+    list-style-type: none
+
+.overlay
+    position: fixed
+    top: 0
+    display: none
+    width: 100%
+    height: 100vh
+    background-color: rgba(0,0,0,0.7)
+    backdrop-filter: blur(10px)
+    z-index: 3
+
+.quest__form--title
+    position: relative
+    .quest__input--info
+        position: absolute
+        bottom: 5px
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 18px
+        height: 18px
+        border: 1px solid #a0a0a0
+        border-radius: 30px
+        font-size: 12px
+        font-weight: 700
+        color: #a0a0a0
+        cursor: help
+        &:hover
+            background-color: #a0a0a0
+            color: #393939
+            transition: .3s all
+    .quest__info--actors
+        left: 150px
+    .quest__info--players
+        left: 175px
+
+// дефолт стили pop-up help menu
+
+.quest__popup--content
+    position: absolute
+    display: none
+    justify-content: center
+    align-items: center
+    width: 400px
+    background-color: #292929
+    border: 1px solid #969696
+    border-radius: 35px
+    color: white
+    font-size: 12px
+    z-index: 5
+    .quest__popup--wrapper
+        display: flex
+        justify-content: center
+        flex-direction: column
+        width: 350px
+        .quest__popup--string
+            margin-bottom: 10px
+            &:last-child
+                margin-bottom: 0
+            span
+                font-weight: 700
+
+.quest__popup--players
+    top: 100px
+    height: 90px
+    .quest__popup--wrapper
+        height: 90px
+
+.quest__popup--actors
+    top: 210px
+    height: 170px
+    .quest__popup--wrapper
+        height: 170px
+
+// дефолт стили инпута
+
+.input__style--default
+    display: flex
+    align-items: center
+    width: 100%
+    height: 40px
+    background-color: #303030
+    border: 1px solid white
+    padding-left: 20px
+    color: white
+    font-weight: 300
+    transition: .3s all
+    &:hover
+        border: 1px solid #FF8A00
+        transition: .3s all
+    &:focus
+        border: 1px solid #FF8A00
+        transition: .3s all
+
+// дефолт стили выпадающего списка
+
+.quest__form--list
+    position: absolute
+    top: 30px
+    display: none
+    width: 400px
+    min-height: 122px
+    padding: 0
+    margin: 0
+    background-color: #303030
+    border: 1px solid white
+    color: white
+    font-weight: 700
+    z-index: 4
+    .quest__list--item
+        display: flex
+        justify-content: space-between
+        align-items: center
+        height: 40px
+        padding: 0 20px
+        border-bottom: 1px solid #565656
+        font-size: 16px
+        cursor: pointer
+        transition: .3s all
+        span
+            color: #ABFFA4
+        &:hover
+            background-color: #404040
+            transition: .3s all
+        &:last-child
+            border: none
+
+// дефолт стили кнопки
+
+.button__wrapper
+    position: relative
+    width: 200px
+    height: 70px
+    .button__wrapper--text
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 200px
+        height: 70px
+        border: 4px solid #FF8A00
+        font-weight: 700
+        font-size: 18px
+        color: white
+    .button__wrapper--blur
+        position: absolute
+        top: 0
+        width: 200px
+        height: 70px
+        background-color: transparent
+        border: 4px solid #FF8A00
+        cursor: pointer
+        transition: .3s all
+        &:hover
+            filter: blur(5px)
+            transition: .3s all
+
+.slick-dots li button:before
+    color: white
+
+
+// выключить скролл при выводе модальных окон (если требуется)
+
+.no-scroll
+    overflow: hidden
+
+.noselect
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+
+@import "range"
+@import "checkbox"
+@import "navbar"
+@import "legend"
+@import "page-authorization"
+@import "page-personalaccount"
+@import "page-quest"
+@import "page-404"

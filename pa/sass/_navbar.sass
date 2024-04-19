@@ -1,0 +1,114 @@
+nav
+    position: fixed
+    top: 0
+    width: 100%
+    height: 70px
+    background-color: #262626
+    color: white
+    font-weight: 700
+    z-index: 2
+    .nav__container
+        position: relative
+        height: 100%
+        ul
+            display: flex
+            align-items: center
+            height: 100%
+            padding: 0
+            margin: 0
+            .nav__logo, .nav__logo--img
+                position: absolute
+                left: 50%
+                top: 50%
+                transform: translate(-50%, -50%)
+                width: 258px
+                height: 63px
+            .nav__unwrap--button
+                display: flex
+                flex-direction: column
+                align-items: center
+                justify-content: center
+                width: 40px
+                height: 40px
+                border: 1px solid white
+                border-radius: 12px
+                cursor: pointer
+                transition: .3s all
+                &:hover
+                    border: 1px solid #ff985d
+                    transition: .3s all
+                .unwrap__button--item
+                    border-radius: 20px
+                    margin-bottom: 5px
+                    background-color: #fff
+                    width: 20px
+                    height: 2px
+                    &:nth-last-child(1)
+                        margin-bottom: 0
+
+.nav--menu
+    position: fixed
+    top: 0
+    left: -400px
+    width: 350px
+    height: 100vh
+    border: none
+    border-right: 1px solid #878787
+    border-top-right-radius: 10px
+    border-bottom-right-radius: 10px
+    background-color: #262626
+    margin-left: 0
+    padding: 0
+    color: white
+    text-align: center
+    z-index: 4
+    .nav__text--account
+        margin: 20px 0
+        font-weight: 700
+        font-size: 25px
+    .nav__button--xmark
+        position: absolute
+        top: 20px
+        right: 20px
+        font-size: 25px
+        cursor: pointer
+        transition: .3s all
+        &:hover
+            color: #ff3a3a
+            transition: .3s all
+    .nav__stroke
+        margin: 20px auto
+        width: 200px
+        height: 1px
+        background-color: #fff
+    .button--block
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 349px
+        height: 70px
+        font-size: 18px
+        font-weight: 300
+        cursor: pointer
+        transition: .3s all
+        &:hover
+            background-color: #333333
+            transition: .3s all
+        &:last-child:hover
+            background-color: rgba(0,0,0,0)
+    .nav__button--logout
+        position: absolute
+        bottom: 0
+        left: 50%
+        transform: translateX(-50%)
+        font-size: 20px
+        color: white
+        cursor: pointer
+        transition: .3s all
+        &:hover
+            color: #FF8282
+            transition: .3s all
+    .notactive
+        cursor: not-allowed
+        background-color: #333333
+        color: #717171

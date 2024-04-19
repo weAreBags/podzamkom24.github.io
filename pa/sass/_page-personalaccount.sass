@@ -1,0 +1,69 @@
+.quests
+    .quests__container
+        position: relative
+        height: 100vh
+        .quests__row
+            display: flex
+            justify-content: center
+            align-items: center
+            padding-top: 70px
+
+            // ВЫБОР КВЕСТОВ
+
+            .quests__block
+                display: flex // flex
+                align-items: center
+                margin: 30px auto
+                width: 300px
+                height: 526px
+                .quests__wrapper
+                    position: relative
+                    display: flex
+                    justify-content: center
+                    width: 100%
+                    height: 170px
+                    background-color: rgba(0,0,0,.4)
+                    color: white
+                    .quests__wrapper--name
+                        position: absolute
+                        top: 50%
+                        transform: translateY(-50%)
+                        font-size: 30px
+                        font-weight: 300
+                        text-align: center
+                        transition: .3s all
+                        span
+                            font-weight: 700
+                    .quests__wrapper--button
+                        position: absolute
+                        width: 250px
+                        height: 50px
+                        top: 50%
+                        left: 50%
+                        transform: translate(-50%, -50%)
+                        opacity: 0
+                        font-size: 23px
+                        font-weight: 700
+                        transition: .3s all
+                        .quests__button--blur, .quests__button--text
+                            position: absolute
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            width: 250px
+                            height: 60px
+                            border: 2px solid #FF8A00
+                            border-radius: 30px
+                            cursor: pointer
+                            transition: .3s all
+                        .quests__button--blur:hover
+                            border: 2px solid #ff985d
+                            filter: blur(2px)
+                            transition: .3s all
+                &:hover
+                    .quests__wrapper--name
+                        opacity: 0
+                        transition: .3s all
+                    .quests__wrapper--button
+                        opacity: 1
+                        transition: .3s all
