@@ -68,7 +68,7 @@
                 $remains = 5;
             }
         } else {
-            header('Location: 404.html'); // пенис
+            header('Location: 404.html');
         }
     }
 ?>
