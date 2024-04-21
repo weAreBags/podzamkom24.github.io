@@ -5,6 +5,10 @@
         echo json_encode(["request" => $message]);
     }
 
+    function serverError($error_text) {
+        echo json_encode(['error' => $error_text]);
+    }
+
     function checkDropdown($value, $array) {
         return in_array($value, $array);
     }

@@ -17,9 +17,10 @@
 
         if($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            // quest_name, quest_legend, quest_genre, quest_min, quest_max, quest_addittional
+
             $quest_name = $row['quest_name'];
             $quest_legend = $row['quest_legend'];
+            $quest_price = $row['quest_price'];
             $quest_genre = $row['quest_genre'];
             $quest_first = $row['first_photo'];
             $quest_second = $row['second_photo'];
@@ -28,7 +29,7 @@
             $quest_max = $row['quest_max'];
             $quest_additional = $row['quest_additional'];
 
-            $areAdditional = ($quest_additional > -1) ? true : false;
+            $areAdditional = ($quest_additional != null) ? true : false;
 
             // получение рейтинга квеста
 
@@ -67,6 +68,10 @@
                 $count = 0;
                 $remains = 5;
             }
+
+            // Трансформация цены
+
+            $formatted_price = number_format($quest_price, 0, '.', ' ');
         } else {
             header('Location: 404.html');
         }
@@ -324,7 +329,7 @@
                     <!-- ============ ПРАЙС И ЗАКАЗ КВЕСТА ============ -->
 
                     <div class="quest__form--orderposition">
-                        <div class="quest__form--cost">СТОИМОСТЬ: <span class="cost__result">4 000</span><span class="cost__ruble--color">₽</span></div>
+                        <div class="quest__form--cost">СТОИМОСТЬ: <span class="cost__result"><?php echo $formatted_price; ?></span><span class="cost__ruble--color">₽</span></div>
 
                         <div class="button__wrapper">
                             <div class="button__wrapper--text">ЗАКАЗАТЬ</div>
