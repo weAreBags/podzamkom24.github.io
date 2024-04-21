@@ -100,13 +100,13 @@
     <script src="js/script.js" defer></script>
     <script src="js/pop-ups.js" defer></script>
     <script src="js/navMenu.js" defer></script>
-    <script src="js/questform/setTheDate.js" defer></script>
-    <script src="js/questform/setPlayersAge.js" defer></script>
-    <script src="js/questform/setActors.js" defer></script>
-    <script src="js/questform/costChange.js" defer></script>
-    <script src="js/questform/submitQuest.js" defer></script>
-    <script src="js/questform/legend.js" defer></script>
-    <script src="js/questform/slickSettings.js" defer></script>
+    <script src="js/quest/setTheDate.js" defer></script>
+    <script src="js/quest/setPlayersAge.js" defer></script>
+    <script src="js/quest/setActors.js" defer></script>
+    <script src="js/quest/costChange.js" defer></script>
+    <script src="js/quest/submitQuest.js" defer></script>
+    <script src="js/quest/legend.js" defer></script>
+    <script src="js/quest/slickSettings.js" defer></script>
 </head>
 
 <body>
