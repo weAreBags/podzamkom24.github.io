@@ -1,6 +1,25 @@
 <?php 
     require_once('php/db.php');
     require_once('php/check_au-token.php');
+
+    // ПОЛУЧЕНИЕ НОМЕРА ПОЛЬЗОВАТЕЛЯ
+
+    $sql = 'SELECT number FROM `users` WHERE token = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $token);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $number = $row['number'];
+
+        if(is_null($number)) {
+            echo '
+            <div class="overlay--special" style="display: block"></div>
+            ';
+        }
+    }
     
     // ПОЛУЧЕНИЕ ИНФОРМАЦИИ ПО КВЕСТАМ
 
@@ -113,7 +132,7 @@
 </head>
 
 <body>
-    <nav>
+    <!-- <nav>
         <div class="nav__container container">
             <ul>
                 <li class="nav__unwrap--button">
@@ -124,9 +143,21 @@
                 <li class="nav__logo"><img src="img/logo.png" alt="logo" class="nav__logo--img noselect"></li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
 
-    <div class="overlay"></div>
+    <div class="overlay" style="display: block"></div>
+
+    <div class="phone--confirmation">
+        <div class="phone--wrapper">
+            <div class="phone__title">Упс.. Номер не подтверждён!</div>
+            <label for="" class="label__style--default">ВАШ ДЕЙСТВИТЕЛЬНЫЙ НОМЕР ТЕЛЕФОНА</label>
+            <input type="text" class="input__style--default" placeholder="В ФОРМАТЕ 79XXXXXXXXX" maxlenth="3">
+            <div class="button__wrapper">
+                <div class="button__wrapper--text">ПОДТВЕРДИТЬ</div>
+                <button class="button__wrapper--blur"></button>
+            </div>
+        </div>
+    </div>
     
     <dialog class="nav--menu" id="dialog" open>
         <div class="nav__text--account"><?=mb_strtoupper($_COOKIE['nickname'])?></div>
@@ -188,7 +219,7 @@
                     <!-- ============ ДАТА ЗАПИСИ ============ -->
 
                     <div class="quest__form--dateposition">
-                        <label for="date__input" class="quest__input--title quest__title--date noselect">ДАТА ПРОВЕДЕНИЯ ИГРЫ <span>*</span></label>
+                        <label for="date__input" class="label__style--default quest__input--title quest__title--date noselect">ДАТА ПРОВЕДЕНИЯ ИГРЫ <span>*</span></label>
                         <div class="input__style--default quest__form--date" id="date__input" data-day="" data-time="">НАЖМИТЕ, ЧТОБЫ УСТАНОВИТЬ ДАТУ</div>
 
                         <table class='quest__selectform--table close__modal' id='date__table'>
@@ -208,7 +239,7 @@
 
                     <div class="quest__form--playersposition">
                         <div class="quest__form--title">
-                            <label for="players" class="quest__input--title quest__title--players noselect">КОЛИЧЕСТВО ИГРОКОВ <span>*</span></label>
+                            <label for="players" class="label__style--default quest__input--title quest__title--players noselect">КОЛИЧЕСТВО ИГРОКОВ <span>*</span></label>
                             <?php 
                                 if($areAdditional) {
                                     echo '<div class="quest__input--info quest__info--players" id="help--players" data-id="players">?</div>';
@@ -249,7 +280,7 @@
                     <!-- ============ ВОЗРАСТ ============ -->
 
                     <div class="quest__form--ageposition">
-                        <label for="age" class="quest__input--title quest__title--age noselect">СРЕДНИЙ ВОЗРАСТ КОМАНДЫ <span>*</span></label>
+                        <label for="age" class="label__style--default quest__input--title quest__title--age noselect">СРЕДНИЙ ВОЗРАСТ КОМАНДЫ <span>*</span></label>
                         <div class="input__style--default quest__form--age" id="age" data-age="">
                             <div class="quest__age--text noselect">НАЖМИТЕ, ЧТОБЫ УКАЗАТЬ ВОЗРАСТ</div>
                             <div class="quest__age--angle noselect"><i class="fa-solid fa-angle-down"></i></div>
@@ -278,7 +309,7 @@
 
                     <div class="quest__form--actorsposition">
                         <div class="quest__form--title">
-                            <label for="actors" class="quest__input--title quest__title--actors noselect">НАЛИЧИЕ АКТЁРОВ <span>*</span></label>
+                            <label for="actors" class="label__style--default quest__input--title quest__title--actors noselect">НАЛИЧИЕ АКТЁРОВ <span>*</span></label>
                             <div class="quest__input--info quest__info--actors" id="help--actors" data-id="actors">?</div>
                         </div>
                         <div class="input__style--default quest__form--actors" id="actors" data-actors="">
@@ -311,7 +342,7 @@
                     <!-- ============ ПРОМОКОД ============ -->
 
                     <div class="quest__form--promoposition">
-                        <label for="promo" class="quest__input--title quest__title--promo noselect">ПРОМОКОД (НЕОБЯЗАТЕЛЬНО)</label>
+                        <label for="promo" class="label__style--default quest__input--title quest__title--promo noselect">ПРОМОКОД (НЕОБЯЗАТЕЛЬНО)</label>
                         <input type="text" class="input__style--default quest__form--promo" id="promo" placeholder="ВВЕДИТЕ СЮДА ПРОМОКОД">
                     </div>
 
@@ -319,7 +350,7 @@
 
                     <div class="quest__form--rulesposition">
                         <input type="checkbox" class="quest__form--rules" id="rules" >
-                        <label for="rules" class="quest__input--title quest__title--rules noselect">
+                        <label for="rules" class="label__style--default quest__input--title quest__title--rules noselect">
                             Я подтверждаю, что ознакомлен(а) со всеми <a href="#" class="quest__rules--link">правилами</a>
                         </label>
                     </div>
