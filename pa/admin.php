@@ -1,6 +1,8 @@
 <?php
     require_once('php/db.php');
 
+    // УСИЛЕННАЯ ПРОВЕРКА (ТОКЕН + ID_ROLE ПОЛЬЗОВАТЕЛЯ)
+
     if(isset($_COOKIE['auth_token'])) {
         $token = $_COOKIE['auth_token'];
 
