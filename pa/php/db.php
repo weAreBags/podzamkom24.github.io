@@ -1,9 +1,9 @@
 <?php
 
-    $dbhost = "localhost";
-    $dblogin = "root";
-    $dbpass = "";
-    $dbname = "podzamkom";
+    $dbhost = "136.243.14.123";
+    $dblogin = "podza400_admin";
+    $dbpass = "XTHYFRJDNFOTH1";
+    $dbname = "podza400_database";
 
     $conn = new mysqli($dbhost, $dblogin, $dbpass, $dbname);
 
