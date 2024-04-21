@@ -132,7 +132,7 @@
 </head>
 
 <body>
-    <!-- <nav>
+    <nav>
         <div class="nav__container container">
             <ul>
                 <li class="nav__unwrap--button">
@@ -143,7 +143,7 @@
                 <li class="nav__logo"><img src="img/logo.png" alt="logo" class="nav__logo--img noselect"></li>
             </ul>
         </div>
-    </nav> -->
+    </nav>
 
     <div class="overlay" style="display: block"></div>
 
@@ -151,7 +151,7 @@
         <div class="phone--wrapper">
             <div class="phone__title">Упс.. Номер не подтверждён!</div>
             <label for="" class="label__style--default">ВАШ ДЕЙСТВИТЕЛЬНЫЙ НОМЕР ТЕЛЕФОНА</label>
-            <input type="text" class="input__style--default" placeholder="В ФОРМАТЕ 79XXXXXXXXX" maxlenth="3">
+            <input type="text" class="input__style--default" placeholder="В ФОРМАТЕ 79XXXXXXXXX" ="3">
             <div class="button__wrapper">
                 <div class="button__wrapper--text">ПОДТВЕРДИТЬ</div>
                 <button class="button__wrapper--blur"></button>
