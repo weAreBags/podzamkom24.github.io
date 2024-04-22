@@ -16,7 +16,7 @@ a
 ul
     list-style-type: none
 
-.overlay
+.overlay, .overlay--special
     position: fixed
     top: 0
     display: none
@@ -26,9 +26,9 @@ ul
     backdrop-filter: blur(10px)
     z-index: 3
 
-.quest__form--title
+.quest__form--title, .phone__label--wrapper
     position: relative
-    .quest__input--info
+    .input__info--default
         position: absolute
         bottom: 5px
         display: flex
@@ -42,6 +42,7 @@ ul
         font-weight: 700
         color: #a0a0a0
         cursor: help
+        transition: .3s all
         &:hover
             background-color: #a0a0a0
             color: #393939
@@ -50,6 +51,8 @@ ul
         left: 150px
     .quest__info--players
         left: 175px
+    .phone__info--phone
+        left: 280px
 
 // дефолт стили лабела
 
@@ -63,7 +66,7 @@ ul
 
 // дефолт стили pop-up help menu
 
-.quest__popup--content
+.popup__content--default
     position: absolute
     display: none
     justify-content: center
@@ -75,12 +78,12 @@ ul
     color: white
     font-size: 12px
     z-index: 5
-    .quest__popup--wrapper
+    .popup__wrapper
         display: flex
         justify-content: center
         flex-direction: column
         width: 350px
-        .quest__popup--string
+        .popup__item
             margin-bottom: 10px
             &:last-child
                 margin-bottom: 0
@@ -90,14 +93,17 @@ ul
 .quest__popup--players
     top: 100px
     height: 90px
-    .quest__popup--wrapper
-        height: 90px
 
 .quest__popup--actors
-    top: 210px
+    top: 200px
     height: 170px
-    .quest__popup--wrapper
-        height: 170px
+
+.phone__popup--number
+    top: -40px
+    width: 450px
+    height: 100px
+    .popup__wrapper
+        width: 380px
 
 // дефолт стили инпута
 

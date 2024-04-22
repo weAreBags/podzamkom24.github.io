@@ -17,6 +17,27 @@
         if(is_null($number)) {
             echo '
             <div class="overlay--special" style="display: block"></div>
+
+            <div class="phone--confirmation">
+                <form action="php/set_phone.php" method="POST" class="phone__form" id="phone__form">
+                    <h2 class="phone__title">НЕОБХОДИМ НОМЕР ТЕЛЕФОНА</h2>
+                    <div class="phone__label--wrapper">
+                        <label for="phone" class="label__style--default">ВАШ ДЕЙСТВИТЕЛЬНЫЙ НОМЕР ТЕЛЕФОНА</label>
+                        <div class="input__info--default phone__info--phone" id="help--phone" data-id="phone">?</div>
+                    </div>
+                    <input type="text" class="input__style--default" id="phone" placeholder="В ФОРМАТЕ 79XXXXXXXXX"  maxlength="11" required>
+                    <div class="button__wrapper">
+                        <div class="button__wrapper--text">СОХРАНИТЬ</div>
+                        <button class="button__wrapper--blur phone__button--submit"></button>
+                    </div>
+                </form>
+
+                <div class="popup__content--default phone__popup--number" id="popup--phone">
+                    <div class="popup__wrapper">
+                        <div class="popup__item">Ввод номера необходим для прямой связи между <span>Вами и администратором.</span> Пожалуйста, используйте Ваш действительный номер телефона.</div>
+                    </div>
+                </div>
+            </div>
             ';
         }
     }
@@ -129,6 +150,7 @@
     <script src="js/quest/submitQuest.js" defer></script>
     <script src="js/quest/legend.js" defer></script>
     <script src="js/quest/slickSettings.js" defer></script>
+    <script src="js/quest/setPhone.js" defer></script>
 </head>
 
 <body>
@@ -145,19 +167,7 @@
         </div>
     </nav>
 
-    <div class="overlay" style="display: block"></div>
-
-    <div class="phone--confirmation">
-        <div class="phone--wrapper">
-            <div class="phone__title">Упс.. Номер не подтверждён!</div>
-            <label for="" class="label__style--default">ВАШ ДЕЙСТВИТЕЛЬНЫЙ НОМЕР ТЕЛЕФОНА</label>
-            <input type="text" class="input__style--default" placeholder="В ФОРМАТЕ 79XXXXXXXXX" ="3">
-            <div class="button__wrapper">
-                <div class="button__wrapper--text">ПОДТВЕРДИТЬ</div>
-                <button class="button__wrapper--blur"></button>
-            </div>
-        </div>
-    </div>
+    <div class="overlay"></div>
     
     <dialog class="nav--menu" id="dialog" open>
         <div class="nav__text--account"><?=mb_strtoupper($_COOKIE['nickname'])?></div>
@@ -242,7 +252,7 @@
                             <label for="players" class="label__style--default quest__input--title quest__title--players noselect">КОЛИЧЕСТВО ИГРОКОВ <span>*</span></label>
                             <?php 
                                 if($areAdditional) {
-                                    echo '<div class="quest__input--info quest__info--players" id="help--players" data-id="players">?</div>';
+                                    echo '<div class="input__info--default quest__info--players" id="help--players" data-id="players">?</div>';
                                 }
                             ?>
                         </div>
@@ -267,9 +277,9 @@
                     <?php 
                         if ($areAdditional) {
                             echo '
-                            <div class="quest__popup--content quest__popup--players" id="popup--players">
-                                <div class="quest__popup--wrapper">
-                                    <div class="quest__popup--string">Начиная с <span>'. $quest_additional .'-ого</span> человека идёт дополнительная оплата в <span>500₽ за дополнительную персону</span>.</div>
+                            <div class="popup__content--default quest__popup--players" id="popup--players">
+                                <div class="popup__wrapper">
+                                    <div class="popup__item">Начиная с <span>'. $quest_additional .'-ого</span> человека идёт дополнительная оплата в <span>500₽ за дополнительную персону</span>.</div>
                                 </div>
                             </div>
                             ';
@@ -310,7 +320,7 @@
                     <div class="quest__form--actorsposition">
                         <div class="quest__form--title">
                             <label for="actors" class="label__style--default quest__input--title quest__title--actors noselect">НАЛИЧИЕ АКТЁРОВ <span>*</span></label>
-                            <div class="quest__input--info quest__info--actors" id="help--actors" data-id="actors">?</div>
+                            <div class="input__info--default quest__info--actors" id="help--actors" data-id="actors">?</div>
                         </div>
                         <div class="input__style--default quest__form--actors" id="actors" data-actors="">
                             <div class="quest__actors--text noselect">НАЖМИТЕ, ЧТОБЫ ВЫБРАТЬ АКТЁРОВ</div>
@@ -331,11 +341,11 @@
                         </ul>
                     </div>
 
-                    <div class="quest__popup--content quest__popup--actors" id="popup--actors">
-                        <div class="quest__popup--wrapper">
-                            <div class="quest__popup--string"><span>Без актеров</span> - подходит для детей 9-12 лет, когда в команде игроков присутствует взрослый.</div>
-                            <div class="quest__popup--string"><span>Актёр-помощник</span> - персонаж, помогающий проходить квест, подходит для детей 9-14 лет.</div>
-                            <div class="quest__popup--string"><span>Актёры</span> - персонажи, добавляющие динамики в игру, подходит для опытных команд от 14+.</div>
+                    <div class="popup__content--default quest__popup--actors" id="popup--actors">
+                        <div class="popup__wrapper">
+                            <div class="popup__item"><span>Без актеров</span> - подходит для детей 9-12 лет, когда в команде игроков присутствует взрослый.</div>
+                            <div class="popup__item"><span>Актёр-помощник</span> - персонаж, помогающий проходить квест, подходит для детей 9-14 лет.</div>
+                            <div class="popup__item"><span>Актёры</span> - персонажи, добавляющие динамики в игру, подходит для опытных команд от 14+.</div>
                         </div>
                     </div>
 

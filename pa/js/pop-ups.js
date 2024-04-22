@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var targetDiv = $('.quest__input--info')
+    var targetDiv = $('.input__info--default')
 
     targetDiv.on('mouseenter', function() {
         var id = $(this).data('id')
