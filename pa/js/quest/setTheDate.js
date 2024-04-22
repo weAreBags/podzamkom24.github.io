@@ -42,6 +42,7 @@ $(document).ready(function() {
     })
 
     $('.quest__day--actual').on('click', function() {
+        var quest = getQuestParam(window.location.href)
         var day = $(this).data('no')
         var month = $('.quest__month--isactive').data('month')
         
@@ -57,6 +58,7 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'json',
             data: {
+                quest: quest,
                 date: date
             },
             success: function(response) {
@@ -109,6 +111,21 @@ $(document).ready(function() {
             }
         })
     })
+
+    var getQuestParam = function(url) {
+        var parser = document.createElement('a')
+        parser.href = url
+
+        var params = parser.search.substring(1).split('&')
+        
+        for (var i = 0; i < params.length; i++) {
+            var pair = params[i].split('=')
+            if (pair[0] === 'quest') {
+                return decodeURIComponent(pair[1])
+            }
+        }
+        return null
+    }
 
     function getBackCalendar() {
         $('.quest__time--select').css('display', 'none')

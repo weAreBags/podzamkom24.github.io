@@ -38,14 +38,53 @@
         $stmt->bind_param('s', $token);
         $stmt->execute();
         $result = $stmt->get_result();
-        while ($row = $result->fetch_assoc())
+
+        if($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
             $user_id = $row['user_id'];
+        }
+
+        // ЕСТЬ ЛИ УЖЕ ЗАКАЗ НА ПОЛЬЗОВАТЕЛЯ
+
+        $sql = 'SELECT date, time FROM `orders` WHERE user_id = ?';
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if($result->num_rows > 0) {
+            $row = array();
+            $currentDateTime = date('Y-m-d H:i:s', strtotime('-1 hour'));
+
+            while ($tempVal = $result->fetch_assoc()) {
+                $row[] = array('date' => $tempVal['date'], 'time' => $tempVal['time']);
+            }
+
+            // Разбиение даты и времени, полученные из БД
+
+            foreach ($row as $rows) {
+                $dateTime = $rows['date'] . ' ' . $rows['time'];
+                if ($dateTime > $currentDateTime) {
+                    // Дата и время из массива больше текущих
+                    // Здесь можно выполнить необходимые действия
+                    echo json_encode(['request' => 'низя']);
+                    exit;
+                } else {
+                    // Дата и время из массива меньше или равны текущим
+                    // Здесь можно выполнить другие действия
+                    $val = true;
+                }
+            }
+
+            // echo json_encode(['request' => $val]);
+            // exit;
+        }
 
         // ЗАПРОС ДАТЫ
 
-        $sql = "SELECT date, time FROM `orders` WHERE date = ? AND time = ?";
+        $sql = "SELECT date, time FROM `orders` WHERE date = ? AND time = ? AND quest_link = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ss', $day, $time);
+        $stmt->bind_param('sss', $day, $time, $quest);
         $stmt->execute();
         $result = $stmt->get_result();
 

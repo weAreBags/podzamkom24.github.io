@@ -8,10 +8,11 @@
         $availableTimes = array_fill(0, 7, false);
         $times = array("10:00:00", "12:00:00", "14:00:00", "16:00:00", "18:00:00", "20:00:00", "22:00:00");
         $date = $_POST['date'];
+        $quest = $_POST['quest'];
 
-        $sql = "SELECT time FROM `orders` WHERE date = ?";
+        $sql = "SELECT time FROM `orders` WHERE date = ? AND quest_link = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s', $date);
+        $stmt->bind_param('ss', $date, $quest);
         $stmt->execute();
 
         $result = $stmt->get_result();

@@ -22,7 +22,7 @@
                 <form action="php/set_phone.php" method="POST" class="phone__form" id="phone__form">
                     <h2 class="phone__title">НЕОБХОДИМ НОМЕР ТЕЛЕФОНА</h2>
                     <div class="phone__label--wrapper">
-                        <label for="phone" class="label__style--default">ВАШ ДЕЙСТВИТЕЛЬНЫЙ НОМЕР ТЕЛЕФОНА</label>
+                        <label for="phone" class="label__style--default noselect">ВАШ ДЕЙСТВИТЕЛЬНЫЙ НОМЕР ТЕЛЕФОНА</label>
                         <div class="input__info--default phone__info--phone" id="help--phone" data-id="phone">?</div>
                     </div>
                     <input type="text" class="input__style--default" id="phone" placeholder="В ФОРМАТЕ 79XXXXXXXXX"  maxlength="11" required>
@@ -384,10 +384,10 @@
     <?php
 
         function showTheDate() {
-            date_default_timezone_set('Europe/Moscow');
+            date_default_timezone_set('Asia/Krasnoyarsk');
 
             $currentDate = date('Y-m-d'); // текущая дата
-            $currentDay = date('d'); // текущий день
+            $currentDay = date('d', strtotime('+1 day')); // текущий день
             $firstDayOfMonth = date('Y-m-01', strtotime($currentDate)); // первый день месяца
             $dayOfWeek = date('w', strtotime($firstDayOfMonth)); // день недели месяца, где 0 - воскресенье, 6 - суббота
             $daysInMonth = date('t', strtotime($currentDate)); // кол-во дней в месяце

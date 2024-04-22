@@ -80,11 +80,12 @@ $(document).ready(function() {
                         promocode: promocode
                     },
                     success: function(responce) {
-                        if (responce.request == false) {
-                            alert(123)
-                        } else {
-                            alert(responce.request)
-                        }
+                        alert(JSON.stringify(responce.request))
+                        // if (responce.request == false) {
+                        //     alert(123)
+                        // } else {
+                        //     alert(responce.request)
+                        // }
                     },
                     error: function(xhr) {
                         var errorMessage = 'Произошла ошибка при выполнении запроса.'
