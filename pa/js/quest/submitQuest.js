@@ -80,10 +80,18 @@ $(document).ready(function() {
                         promocode: promocode
                     },
                     success: function(responce) {
+
                         if (responce.error) {
-                            alert(responce.error)
+                            var showNotification = true
+                            $('.notification__block').removeClass('notification__alert').addClass('notification__error')
+                            $('.notification__title').html('ВНУТРЕННЯЯ ОШИБКА')
+                            $('.notification__descr').html(responce.error)
+                            window.workWithAlert()
                         } else {
-                            alert(responce.request)
+                            var showNotification = true
+                            $('.notification__block').removeClass('notification__error').addClass('notification__alert')
+                            $('.notification__title').html('УВЕДОМЛЕНИЕ')
+                            $('.notification__descr').html(responce.request)
                         }
                         // alert(JSON.stringify(responce.request))
                         // if (responce.request == false) {

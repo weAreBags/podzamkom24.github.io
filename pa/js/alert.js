@@ -1,12 +1,17 @@
 $(document).ready(function() {
-    var alertElement = $('.alert')
+    window.workWithAlert = function() {
+        var alertElement = $('.notification__block')
 
-    alertElement.on('click', closeAlert)
-    alertElement.fadeIn(function () {
-        setTimeout(closeAlert, 10000)
-    })
-
-    function closeAlert() {
-        alertElement.fadeOut()
+        alertElement.on('click', function() {
+            alertElement.fadeOut()
+        })
+        
+        if (showNotification) {
+            alertElement.fadeIn(function () { 
+                setTimeout(function() {
+                    alertElement.fadeOut()
+                }, 10000)
+            })
+        }
     }
 })
