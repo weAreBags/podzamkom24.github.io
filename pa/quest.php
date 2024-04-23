@@ -25,7 +25,7 @@
                         <label for="phone" class="label__style--default noselect">ВАШ ДЕЙСТВИТЕЛЬНЫЙ НОМЕР ТЕЛЕФОНА</label>
                         <div class="input__info--default phone__info--phone" id="help--phone" data-id="phone">?</div>
                     </div>
-                    <input type="text" class="input__style--default" id="phone" placeholder="В ФОРМАТЕ 79XXXXXXXXX"  maxlength="11" required>
+                    <input type="text" class="input__style--default" id="phone" placeholder="В ФОРМАТЕ 79XXXXXXXXX"  minlenth="11" maxlength="11" required>
                     <div class="button__wrapper">
                         <div class="button__wrapper--text">СОХРАНИТЬ</div>
                         <button class="button__wrapper--blur phone__button--submit"></button>
@@ -151,6 +151,7 @@
     <script src="js/quest/legend.js" defer></script>
     <script src="js/quest/slickSettings.js" defer></script>
     <script src="js/quest/setPhone.js" defer></script>
+    <script src="js/alert.js" defer></script>
 </head>
 
 <body>

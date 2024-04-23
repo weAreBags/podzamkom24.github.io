@@ -43,6 +43,25 @@
             $row = $result->fetch_assoc();
             $user_id = $row['user_id'];
         }
+        
+        // ПРОВЕРКА НА НОМЕР
+
+        $sql = 'SELECT number FROM `users` WHERE user_id = ?';
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $user_number = $row['number'];
+
+            if (is_null($user_number)) {
+                $message = 'Номер телефона не был найден. Пожалуйста, повторите попытку.';
+                serverError($message);
+                exit;
+            }
+        }
 
         // ЕСТЬ ЛИ УЖЕ ЗАКАЗ НА ПОЛЬЗОВАТЕЛЯ
 
@@ -128,24 +147,6 @@
             sendToClient($message);
             exit;
         }
-
-        // ПРОВЕРКА НА НОМЕР
-
-        $sql = 'SELECT number FROM `users` WHERE user_id = ?';
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s', $user_id);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-
-        if($row['number'] == null) {
-            $numberStatus = false;
-            sendToClient($numberStatus);
-            exit;
-        }
-
-        // if ($user_id)
 
         // ДОБАВЛЕНИЕ КВЕСТА В ЗАКАЗЫ
 
