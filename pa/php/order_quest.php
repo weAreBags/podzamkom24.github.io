@@ -65,19 +65,11 @@
             foreach ($row as $rows) {
                 $dateTime = $rows['date'] . ' ' . $rows['time'];
                 if ($dateTime > $currentDateTime) {
-                    // Дата и время из массива больше текущих
-                    // Здесь можно выполнить необходимые действия
-                    echo json_encode(['request' => 'низя']);
+                    $message = 'У Вас уже есть активный заказ. Пожалуйста, повторите попытку позднее.';
+                    serverError($message);
                     exit;
-                } else {
-                    // Дата и время из массива меньше или равны текущим
-                    // Здесь можно выполнить другие действия
-                    $val = true;
                 }
             }
-
-            // echo json_encode(['request' => $val]);
-            // exit;
         }
 
         // ЗАПРОС ДАТЫ

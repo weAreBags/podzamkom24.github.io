@@ -80,7 +80,12 @@ $(document).ready(function() {
                         promocode: promocode
                     },
                     success: function(responce) {
-                        alert(JSON.stringify(responce.request))
+                        if (responce.error) {
+                            alert(responce.error)
+                        } else {
+                            alert(responce.request)
+                        }
+                        // alert(JSON.stringify(responce.request))
                         // if (responce.request == false) {
                         //     alert(123)
                         // } else {
