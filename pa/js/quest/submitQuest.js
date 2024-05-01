@@ -81,24 +81,35 @@ $(document).ready(function() {
                     },
                     success: function(responce) {
 
-                        if (responce.error) {
-                            var showNotification = true
-                            $('.notification__block').removeClass('notification__alert').addClass('notification__error')
-                            $('.notification__title').html('ВНУТРЕННЯЯ ОШИБКА')
-                            $('.notification__descr').html(responce.error)
-                            window.workWithAlert()
-                        } else {
-                            var showNotification = true
-                            $('.notification__block').removeClass('notification__error').addClass('notification__alert')
-                            $('.notification__title').html('УВЕДОМЛЕНИЕ')
-                            $('.notification__descr').html(responce.request)
+                        var status = (responce.error) ? 0 : 1 // надо как-то на сервере поставить status 0 при ошибке, а при алёрте просто 1 и + вывести контент надо
+
+                        alertInteraction(status, responce.request)
+
+                        function alertInteraction(status, content) { // status: 0 - error | 1 - alert
+                            var alertBlock = $('.notification__block')
+                            var alertTitle = $('.notification__title')
+                            var alertDescr = $('.notification__descr')
+
+                            if (status) {
+                                alertBlock.removeClass('notification__error').addClass('notification__alert')
+                                alertTitle.html('УВЕДОМЛЕНИЕ')
+                            } else {
+                                alertBlock.removeClass('notification__alert').addClass('notification__error')
+                                alertTitle.html('ВНУТРЕННЯЯ ОШИБКА')
+                            }
+
+                            alertDescr.html(content)
+                            
+                            alertBlock.on('click', function() {
+                                alertBlock.fadeOut()
+                            })
+
+                            alertBlock.fadeIn(function () { 
+                                setTimeout(function() {
+                                    alertBlock.fadeOut()
+                                }, 10000)
+                            })
                         }
-                        // alert(JSON.stringify(responce.request))
-                        // if (responce.request == false) {
-                        //     alert(123)
-                        // } else {
-                        //     alert(responce.request)
-                        // }
                     },
                     error: function(xhr) {
                         var errorMessage = 'Произошла ошибка при выполнении запроса.'
