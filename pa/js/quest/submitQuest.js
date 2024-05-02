@@ -80,48 +80,20 @@ $(document).ready(function() {
                         promocode: promocode
                     },
                     success: function(responce) {
+                        var status = responce.request[0]
+                        var message = responce.request[1]
 
-                        var status = (responce.error) ? 0 : 1 // надо как-то на сервере поставить status 0 при ошибке, а при алёрте просто 1 и + вывести контент надо
-
-                        alertInteraction(status, responce.request)
-
-                        function alertInteraction(status, content) { // status: 0 - error | 1 - alert
-                            var alertBlock = $('.notification__block')
-                            var alertTitle = $('.notification__title')
-                            var alertDescr = $('.notification__descr')
-
-                            if (status) {
-                                alertBlock.removeClass('notification__error').addClass('notification__alert')
-                                alertTitle.html('УВЕДОМЛЕНИЕ')
-                            } else {
-                                alertBlock.removeClass('notification__alert').addClass('notification__error')
-                                alertTitle.html('ВНУТРЕННЯЯ ОШИБКА')
-                            }
-
-                            alertDescr.html(content)
-                            
-                            alertBlock.on('click', function() {
-                                alertBlock.fadeOut()
-                            })
-
-                            alertBlock.fadeIn(function () { 
-                                setTimeout(function() {
-                                    alertBlock.fadeOut()
-                                }, 10000)
-                            })
-                        }
+                        alertInteraction(status, message)
                     },
                     error: function(xhr) {
-                        var errorMessage = 'Произошла ошибка при выполнении запроса.'
-                        if (xhr.status === 500) {
-                            errorMessage += ' Ошибка сервера: ' + xhr.statusText
-                        } else if (xhr.status === 404) {
-                            errorMessage += ' Страница не найдена.'
+                        if (xhr.status === 404) {
+                            errorMessage = 'Страница обработки запроса не найдена. Пожалуйста, обновите страницу или обратитесь в техническую поддержку.'
                         } else {
-                            errorMessage += ' Статус ошибки: ' + xhr.status
+                            errorMessage = 'Статус ошибки: ' + xhr.status + '. Пожалуйста, обновите страницу или обратитесь в тех. поддержку.'
                         }
+
+                        alertInteraction(false, errorMessage)
                         console.error(errorMessage)
-                        alert(errorMessage)
                     }
                 })
             } else {

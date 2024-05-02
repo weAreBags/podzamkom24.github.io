@@ -140,7 +140,7 @@
     <script src="js/jquery.validate.min.js" defer></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
     <script src="js/maskedinput.min.js" defer></script>
-    <script src="js/alerts.js" defer></script>
+    <script src="js/alert.js" defer></script>
     <script src="js/script.js" defer></script>
     <script src="js/pop-ups.js" defer></script>
     <script src="js/navMenu.js" defer></script>

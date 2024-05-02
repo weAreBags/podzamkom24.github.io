@@ -5,10 +5,6 @@
         echo json_encode(["request" => $message]);
     }
 
-    function serverError($error_text) {
-        echo json_encode(['error' => $error_text]);
-    }
-
     function checkDropdown($value, $array) {
         return in_array($value, $array);
     }
@@ -26,7 +22,7 @@
         $actorsArray = ['wa', 'as', 'ac'];
 
         if (empty($day) || empty($time) || empty($players) || empty($age) || empty($actors)) {
-            $message = '● Некоторые поля пустые. Пожалуйста, заполните все поля.';
+            $message = array(false, 'Некоторые поля из формы остались пустыми. Пожалуйста, заполните все поля и повторите попытку.');
             sendToClient($message);
             exit;
         }
@@ -57,8 +53,8 @@
             $user_number = $row['number'];
 
             if (is_null($user_number)) {
-                $message = 'Номер телефона не был найден. Пожалуйста, повторите попытку.';
-                serverError($message);
+                $message = array(false, 'Номер телефона не был найден. Пожалуйста, привяжите номер телефона в настройках и повторите попытку.');
+                sendToClient($message);
                 exit;
             }
         }
@@ -84,8 +80,8 @@
             foreach ($row as $rows) {
                 $dateTime = $rows['date'] . ' ' . $rows['time'];
                 if ($dateTime > $currentDateTime) {
-                    $message = 'У Вас уже есть активный заказ. Пожалуйста, повторите попытку позднее.';
-                    serverError($message);
+                    $message = array(false, 'У Вас уже есть активный заказ на квест. Пожалуйста, повторите попытку позднее.');
+                    sendToClient($message);
                     exit;
                 }
             }
@@ -102,7 +98,7 @@
         // ДАТА
 
         if ($result->num_rows > 0) {
-            $message = '● Запись на данную дату уже имеется. Пожалуйста, выберите другое число и время.';
+            $message = array(false, 'Запись на заданную дату или время уже имеется. Пожалуйста, выберите другое число и время и повторите попытку.');
             sendToClient($message);
             exit;            
         } else {
@@ -112,7 +108,7 @@
             $nextDateLastDay = date('Y-m-t', strtotime('+1 month', strtotime(date('Y-m-d')))); // следующий месяц
 
             if (!($day >= $currentDate && $day <= $currentDateLastDay || $day >= $nextDate && $day <= $nextDateLastDay)) {
-                $message = '● Была введена неверная дата. Пожалуйста, повторите попытку.';
+                $message = array(false, 'Была выбрана некорректная дата записи. Пожалуйста, перепроверьте данные и повторите попытку.');
                 sendToClient($message);
                 exit;
             }
@@ -134,7 +130,7 @@
             $quest_max = $row['quest_max'];
             
             if($players < $quest_min || $players > $quest_max) {
-                $message = '● Указано неверное количество участников. Пожалуйста, повторите попытку.';
+                $message = array(false, 'Указано неверное количество участников. Пожалуйста, перепроверьте данные и повторите попытку.');
                 sendToClient($message);
                 exit;
             }
@@ -143,7 +139,7 @@
         // DROPDOWN's
 
         if (!checkDropdown($age, $ageArray) || !checkDropdown($actors, $actorsArray)) {
-            $message = '● Выбран некорректный возраст и/или неверная группа актёров. Пожалуйста, повторите попытку.';
+            $message = array(false, 'Выбран некорректный возраст и/или неверная группа актёров. Пожалуйста, перепроверьте данные и повторите попытку.');
             sendToClient($message);
             exit;
         }
@@ -155,14 +151,17 @@
         $stmt->bind_param("ssssssss", $user_id, $quest, $day, $time, $players, $age, $actors, $promocode);
 
         if ($stmt->execute()) {
-            echo json_encode(['request' => 'данные внесены']);
+            $message = array(true, 'Выбранный квест был успешно зарезервирован. В ближайшее время с Вами свяжется администратор для уточнения деталей заказа.');
+            sendToClient($message);
             exit;
         } else {
-            echo json_encode(['request' => $user_id . ' ' . $quest . ' ' . $day . ' ' . $time . ' ' . $players . ' ' . $age . ' ' . $actors . ' ' . $promocode]);
+            $message = array(false, 'При резервировании квеста произошла непредвиденная ошибка. Пожалуйста, перезагрузите страницу и повторите попытку.');
+            sendToClient($message);
             exit;
         }
-
-        echo json_encode(["request" => 'ДАННЫЕ УСПЕШНО ПОЛУЧЕНЫ']);
+        
+        $message = array(false, 'Данные по квесту были успешно получены, однако заказ не был сформирован. Пожалуйста, обратитесь в техническую поддержку.');
+        sendToClient($message);
         exit;
     }
 
