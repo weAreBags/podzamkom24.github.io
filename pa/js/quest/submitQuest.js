@@ -34,10 +34,10 @@ $(document).ready(function() {
             }
 
             var errorMessages = {
-                'isDateAccepted': '● Введена некорректная дата',
-                'isTimeAccepted': '● Введено некорректное время',
-                'isAgeAccepted': '● Выбран некорректный возраст',
-                'isActorsAccepted': '● Выбрана некорректная группа актёров'
+                'isDateAccepted': 'Введена некорректная дата',
+                'isTimeAccepted': 'Введено некорректное время',
+                'isAgeAccepted': 'Выбран некорректный возраст',
+                'isActorsAccepted': 'Выбрана некорректная группа актёров'
             }
 
             var errors = []
@@ -92,19 +92,20 @@ $(document).ready(function() {
                             errorMessage = 'Статус ошибки: ' + xhr.status + '. Пожалуйста, обновите страницу или обратитесь в тех. поддержку.'
                         }
 
-                        alertInteraction(false, errorMessage)
                         console.error(errorMessage)
                     }
                 })
             } else {
                 var fullError = ''
                 errors.forEach(function(error) {
-                    fullError = fullError + '\n' + errorMessages[error]
+                    fullError += ' ● ' + errorMessages[error]
                 })
-                alert('Найдены ошибки: ' + fullError)
+                
+                alertInteraction(false, fullError)
             }
         } else {
-            console.log('miss')
+            message = 'Вы заполнили не все поля. Пожалуйста, перепроверьте данные и повторите попытку.'
+            alertInteraction(false, message)
         }
         
     })
