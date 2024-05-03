@@ -22,8 +22,6 @@
 
     <script src="https://kit.fontawesome.com/c18eb15ed3.js" crossorigin="anonymous" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
-    <script src="js/maskedinput.min.js" defer></script>
-    <script src="js/jquery.validate.min.js" defer></script>
     <script src="js/navMenu.js" defer></script>
     <script src="js/personalaccount/selectQuest.js" defer></script>
 </head>
@@ -49,24 +47,24 @@
         <div class="nav__button--xmark" id="closeDialog"><i class='fa-solid fa-xmark'></i></div>
         <div class="nav__stroke"></div>
         <div class="nav__button--quests button--block noselect notactive">КВЕСТЫ</div>
-        <div class="nav__button--history button--block noselect">ИСТОРИЯ ЗАКАЗОВ</div>
-        <div class="nav__button--settings button--block noselect">НАСТРОЙКИ</div>
+        <a href="history.php" class="nav__button--history button--block noselect">ИСТОРИЯ ЗАКАЗОВ</a>
+        <a href="settings.php" class="nav__button--settings button--block noselect">НАСТРОЙКИ</a>
         <div class="nav__stroke"></div>
         <div class="nav__button--support button--block noselect">СВЯЗЬ С ПОДДЕРЖКОЙ</div>
-        <div class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</div>
+        <a href="admin.php" class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</a>
         <div class="nav__button--logout button--block noselect" id="logout">ВЫХОД</div>
     </dialog>
 
     <section class="quests">
         <div class="quests__container container">
             <div class="quests__row row">
-                <?php generateQuests($conn)?>
+                <?php showQuests($conn)?>
             </div>
         </div>
     </section>
 
     <?php 
-        function generateQuests($conn) {
+        function showQuests($conn) {
             $sql = ("SELECT * FROM quests");
             $result = $conn->query($sql);
 

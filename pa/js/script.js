@@ -89,8 +89,4 @@ $(document).ready(function() {
 
     $('.mainForm').validate() // НАСТРОИТЬ [ВАЖНО!!!!!!!!!]
 
-    // [!] PERSONAL ACCOUNT [!] //
-    // ДАЛЬШЕ ИДУТ ИСКЛЮЧИТЕЛЬНО НАСТРОЙКИ ПЕРСОНАЛЬНОГО АККАУНТА //
-    // [!] PERSONAL ACCOUNT [!] //
-
 })

@@ -137,11 +137,8 @@
 
     <script src="https://kit.fontawesome.com/c18eb15ed3.js" crossorigin="anonymous" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
-    <script src="js/jquery.validate.min.js" defer></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
-    <script src="js/maskedinput.min.js" defer></script>
     <script src="js/alert.js" defer></script>
-    <script src="js/script.js" defer></script>
     <script src="js/pop-ups.js" defer></script>
     <script src="js/navMenu.js" defer></script>
     <script src="js/quest/setTheDate.js" defer></script>
@@ -175,11 +172,11 @@
         <div class="nav__button--xmark" id="closeDialog"><i class='fa-solid fa-xmark'></i></div>
         <div class="nav__stroke"></div>
         <a href="personal_account.php" class="nav__button--quests button--block noselect">КВЕСТЫ</a>
-        <div class="nav__button--history button--block noselect">ИСТОРИЯ ЗАКАЗОВ</div>
-        <div class="nav__button--settings button--block noselect">НАСТРОЙКИ</div>
+        <a href="history.php" class="nav__button--history button--block noselect">ИСТОРИЯ ЗАКАЗОВ</a>
+        <a href="settings.php" class="nav__button--settings button--block noselect">НАСТРОЙКИ</a>
         <div class="nav__stroke"></div>
         <div class="nav__button--support button--block noselect">СВЯЗЬ С ПОДДЕРЖКОЙ</div>
-        <div class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</div>
+        <a href="admin.php" class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</a>
         <div class="nav__button--logout button--block noselect" id="logout">ВЫХОД</div>
     </dialog>
     
