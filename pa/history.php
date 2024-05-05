@@ -1,17 +1,7 @@
 <?php 
     require_once('php/db.php');
     require_once('php/check_au-token.php');
-
-    $sql = 'SELECT user_id FROM `users` WHERE token = ?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('s', $token);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $user_id = $row['user_id'];
-    }
+    require_once('php/getUserID.php');
 
 ?>
 
@@ -38,6 +28,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script src="js/alert.js" defer></script>
     <script src="js/navMenu.js" defer></script>
+    <script src="js/history/moreInfo.js" defer></script>
 </head>
 
 <body>
@@ -71,9 +62,36 @@
 
     <section class="history">
         <div class="history__container container">
+            <h1 class="history__title">ИСТОРИЯ ЗАКАЗОВ</h1>
+            <div class="history__stroke"></div>
             <?=showHistory($conn, $user_id)?>
         </div>
     </section>
+
+    <dialog class="history__info--block close__modal">
+        <div class="history__info--xmark"><i class="fa-solid fa-xmark"></i></div>
+
+        <h2 class="history__info--quest"><span>КВЕСТ: </span>ВИРУС</h2>
+        <div class="history__info--date">3 ДЕКАБРЯ - ВОСКРЕСЕНЬЕ - 12:00</div>
+
+        <div class="history__info--stroke"></div>
+
+        <div class="history__info--players history__info--element"><span>КОЛИЧЕСТВО ИГРОКОВ: </span>5</div>
+        <div class="history__info--age history__info--element"><span>ВОЗРАСТ: </span>СМЕШАННАЯ КОМАНДА</div>
+        <div class="history__info--actors history__info--element"><span>НАЛИЧИЕ АКТЁРОВ: </span>АКТЁР-ПОМОЩНИК</div>
+        <div class="history__info--status history__info--element"><span>СТАТУС: </span>ПРОВЕДЕНО</div>
+
+        <div class="history__info--stroke"></div>
+
+        <div class="history__info--code"><span>КОД ЗАКАЗА: </span>FDJ1H</div>
+
+        <div class="history__info--stroke"></div>
+
+        <div class="button__wrapper history__button--wrapper">
+            <div class="button__wrapper--text">ОСТАВИТЬ ОТЗЫВ</div>
+            <div class="button__wrapper--blur history__info--review"></div>
+        </div>
+    </dialog>
 
     <?php 
 
@@ -85,11 +103,44 @@
             $stmt->execute();
             $result = $stmt->get_result();
 
+            $orders = array();
+
             if($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                echo $row['status'];
+                while ($row = $result->fetch_assoc()) {
+                    $orders[] = $row;
+                }
             }
 
+            
+
+            foreach($orders as $order) {
+                $date_time = $order['date'] . ' ' . $order['time'];
+                $formattedDate = date('d.m.Y H:i', strtotime($date_time));
+                $currentDate = date('d.m.Y H:i', strtotime('-1 hour'));
+
+                switch ($order['status']) {
+                    case 'pending':
+                        $status = ($formattedDate < $currentDate) ? 'ПРОСРОЧЕНО' : 'В ОБРАБОТКЕ';
+                        break;
+                    case 'confirmed':
+                        $status = ($formattedDate < $currentDate) ? 'ПРОВЕДЕНО' : 'ПОДТВЕРЖДЕНО';
+                        break;
+                    case 'canceled':
+                        $status = 'ОТМЕНЕНО';
+                        break;
+                }
+
+                echo '
+                <div class="history__block" data-history="' . $order['code'] . '">
+                    <div class="history__info">
+                        <div class="history__quest info--item"><span>КВЕСТ: </span>' . mb_strtoupper($order['quest_name']) . '</div>
+                        <div class="history__date info--item"><span>ДАТА И ВРЕМЯ ПРОВЕДЕНИЯ: </span>' . $formattedDate . '</div>
+                        <div class="history__status info--item"><span>СТАТУС: </span>' . $status . '</div>
+                    </div>
+                    <button class="history__button--info noselect" id="button__check--moreinfo">ПОДРОБНЕЕ</button>
+                </div>
+                ';
+            }
         }
 
     ?>

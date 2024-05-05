@@ -92,7 +92,7 @@ $(document).ready(function() {
                             errorMessage = 'Статус ошибки: ' + xhr.status + '. Пожалуйста, обновите страницу или обратитесь в тех. поддержку.'
                         }
 
-                        console.error(errorMessage)
+                        alertInteraction(false, errorMessage)
                     }
                 })
             } else {

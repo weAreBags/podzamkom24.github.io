@@ -1,9 +1,6 @@
 <?php
     require_once('db.php');
-
-    function sendToClient($message) {
-        echo json_encode(["request" => $message]);
-    }
+    require_once('client_request.php');
 
     function checkDropdown($value, $array) {
         return in_array($value, $array);
@@ -144,11 +141,37 @@
             exit;
         }
 
+        // ГЕНЕРАЦИЯ КОДА ЗАКАЗА
+
+        $symbols = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $code = '';
+
+        for ($i = 0; $i < 5; $i++) {
+            $code .= $symbols[rand(0, strlen($symbols) - 1)];
+        }
+
+        // ОПРЕДЕЛЕНИЕ НАЗВАНИЯ КВЕСТА
+
+        $sql = 'SELECT quest_name FROM `quests` WHERE quest_link = ?';
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $quest);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $quest_name = $row['quest_name'];
+        } else {
+            $message = array(false, 'Ошибка определения квеста. Пожалуйста, перезагрузите страницу и повторите попытку.');
+            sendToClient($message);
+            exit;
+        }
+
         // ДОБАВЛЕНИЕ КВЕСТА В ЗАКАЗЫ
 
-        $sql = "INSERT INTO `orders` (user_id, quest_link, date, time, players, age, actors, promocode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `orders` (user_id, quest_link, date, time, players, age, actors, promocode, code, quest_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssss", $user_id, $quest, $day, $time, $players, $age, $actors, $promocode);
+        $stmt->bind_param("ssssssssss", $user_id, $quest, $day, $time, $players, $age, $actors, $promocode, $code, $quest_name);
 
         if ($stmt->execute()) {
             $message = array(true, 'Выбранный квест был успешно зарезервирован. В ближайшее время с Вами свяжется администратор для уточнения деталей заказа.');
