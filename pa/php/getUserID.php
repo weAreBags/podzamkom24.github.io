@@ -1,4 +1,5 @@
 <?php
+    $token = $_COOKIE['auth_token'];
 
     $sql = 'SELECT user_id FROM `users` WHERE token = ?';
     $stmt = $conn->prepare($sql);

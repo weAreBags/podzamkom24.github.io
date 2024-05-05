@@ -1,8 +1,8 @@
 <?php
 
-    $dbhost = "136.243.14.123";
-    $dblogin = "podza400_admin";
-    $dbpass = "XTHYFRJDNFOTH1";
+    $dbhost = "136.243.14.123"; // localhost
+    $dblogin = "podza400_admin"; // root
+    $dbpass = "XTHYFRJDNFOTH1"; // пусто
     $dbname = "podza400_database";
 
     $conn = new mysqli($dbhost, $dblogin, $dbpass, $dbname);
