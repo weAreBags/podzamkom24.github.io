@@ -29,6 +29,7 @@
     <script src="js/alert.js" defer></script>
     <script src="js/navMenu.js" defer></script>
     <script src="js/history/moreInfo.js" defer></script>
+    <script src="js/history/buttonActivity.js" defer></script>
 </head>
 
 <body>
@@ -71,29 +72,30 @@
     <dialog class="history__info--block close__modal">
         <div class="history__info--xmark"><i class="fa-solid fa-xmark"></i></div>
 
-        <h2 class="history__info--quest"><span>КВЕСТ: </span>ВИРУС</h2>
-        <div class="history__info--date">3 ДЕКАБРЯ - ВОСКРЕСЕНЬЕ - 12:00</div>
+        <h2 class="history__info--quest">КВЕСТ: <span></span></h2>
+        <div class="history__info--date"><span></span></div>
 
         <div class="history__info--stroke"></div>
 
-        <div class="history__info--players history__info--element"><span>КОЛИЧЕСТВО ИГРОКОВ: </span>5</div>
-        <div class="history__info--age history__info--element"><span>ВОЗРАСТ: </span>СМЕШАННАЯ КОМАНДА</div>
-        <div class="history__info--actors history__info--element"><span>НАЛИЧИЕ АКТЁРОВ: </span>АКТЁР-ПОМОЩНИК</div>
-        <div class="history__info--status history__info--element"><span>СТАТУС: </span>ПРОВЕДЕНО</div>
+        <div class="history__info--players history__info--element">КОЛИЧЕСТВО ИГРОКОВ: <span></span></div>
+        <div class="history__info--age history__info--element">ВОЗРАСТ: <span></span></div>
+        <div class="history__info--actors history__info--element">НАЛИЧИЕ АКТЁРОВ: <span></span></div>
+        <div class="history__info--status history__info--element">СТАТУС: <span></span></div>
 
         <div class="history__info--stroke"></div>
 
-        <div class="history__info--code"><span>КОД ЗАКАЗА: </span>FDJ1H</div>
+        <div class="history__info--code">КОД ЗАКАЗА: <span></span></div>
 
         <div class="history__info--stroke"></div>
 
         <div class="button__wrapper history__button--wrapper">
-            <div class="button__wrapper--text">ОСТАВИТЬ ОТЗЫВ</div>
-            <div class="button__wrapper--blur history__info--review"></div>
+            <div class="button__wrapper--text history__button--text">ОСТАВИТЬ ОТЗЫВ</div>
+            <div class="button__wrapper--blur history__button--activity"></div>
         </div>
     </dialog>
 
-    <?php 
+    <?php
+        
 
         function showHistory($conn, $user_id) {
 
@@ -137,11 +139,15 @@
                         <div class="history__date info--item"><span>ДАТА И ВРЕМЯ ПРОВЕДЕНИЯ: </span>' . $formattedDate . '</div>
                         <div class="history__status info--item"><span>СТАТУС: </span>' . $status . '</div>
                     </div>
-                    <button class="history__button--info noselect" id="button__check--moreinfo">ПОДРОБНЕЕ</button>
+                    <button class="history__button--info noselect">ПОДРОБНЕЕ</button>
                 </div>
                 ';
             }
         }
+
+        require_once('php/alerts.php');
+
+        $conn->close();
 
     ?>
 </body>
