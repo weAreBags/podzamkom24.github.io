@@ -31,7 +31,7 @@ $(document).ready(function() {
                             break
                         case 'cancel':
                             $('.history__button--text').html('ОТМЕНИТЬ ЗАПИСЬ').addClass('history__button--cancel').removeClass('history__button--review')
-                            $('.history__button--activity').addClass('history__button--cancel').removeClass('history__button--review')
+                            $('.history__button--activity').addClass('history__button--cancel').removeClass('history__button--review').attr('id', 'cancel')
                             $('.history__button--wrapper').css('display', 'block')
                             $('.history__info--block').css('height', '540px')
                             break
@@ -48,6 +48,7 @@ $(document).ready(function() {
                     setData('actors', '.history__info--actors span')
                     setData('status', '.history__info--status span')
                     setData('code', '.history__info--code span')
+                    $('.history__info--code').attr('data-code', responce.request['code'])
                     
                     $('.history__info--block, .overlay').fadeIn('fast').css('display', 'flex')
 

@@ -16,7 +16,7 @@ a
 ul
     list-style-type: none
 
-.overlay, .overlay--special
+.overlay, .overlay--special, .overlay--transparent
     position: fixed
     top: 0
     display: none
@@ -25,6 +25,12 @@ ul
     background-color: rgba(0,0,0,0.7)
     backdrop-filter: blur(10px)
     z-index: 3
+
+.overlay--transparent
+    display: none
+    background-color: rgba(0,0,0,0)
+    backdrop-filter: blur(0px)
+    z-index: 4
 
 .quest__form--title, .phone__label--wrapper
     position: relative
@@ -213,7 +219,7 @@ ul
     width: 500px
     height: 100px
     border-radius: 30px
-    z-index: 4
+    z-index: 5
     cursor: pointer
     .notification__title
         margin-top: 10px

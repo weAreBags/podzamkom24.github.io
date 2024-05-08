@@ -28,6 +28,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script src="js/alert.js" defer></script>
     <script src="js/navMenu.js" defer></script>
+    <script src="js/overlays.js" defer></script>
     <script src="js/history/moreInfo.js" defer></script>
     <script src="js/history/buttonActivity.js" defer></script>
 </head>
@@ -47,6 +48,7 @@
     </nav>
 
     <div class="overlay"></div>
+    <!-- <div class="overlay--transparent"></div> -->
     
     <dialog class="nav--menu" id="dialog" open>
         <div class="nav__text--account"><?=mb_strtoupper($_COOKIE['nickname'])?></div>
@@ -84,12 +86,12 @@
 
         <div class="history__info--stroke"></div>
 
-        <div class="history__info--code">КОД ЗАКАЗА: <span></span></div>
+        <div class="history__info--code" data-code="">КОД ЗАКАЗА: <span></span></div>
 
         <div class="history__info--stroke"></div>
 
         <div class="button__wrapper history__button--wrapper">
-            <div class="button__wrapper--text history__button--text">ОСТАВИТЬ ОТЗЫВ</div>
+            <div class="button__wrapper--text history__button--text"></div>
             <div class="button__wrapper--blur history__button--activity"></div>
         </div>
     </dialog>

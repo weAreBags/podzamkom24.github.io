@@ -10,7 +10,7 @@
         $date = $_POST['date'];
         $quest = $_POST['quest'];
 
-        $sql = "SELECT time FROM `orders` WHERE date = ? AND quest_link = ?";
+        $sql = "SELECT time, status FROM `orders` WHERE date = ? AND quest_link = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ss', $date, $quest);
         $stmt->execute();
@@ -18,8 +18,11 @@
         $result = $stmt->get_result();
 
         while ($row = $result->fetch_assoc()) {
-            $index = array_search($row['time'], $times);
-            $availableTimes[$index] = true;
+            $status = $row['status'];
+            if($status === 'pending') {
+                $index = array_search($row['time'], $times);
+                $availableTimes[$index] = true;
+            }
         }
 
         echo json_encode(["result" => $availableTimes]);

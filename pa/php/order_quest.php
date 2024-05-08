@@ -58,7 +58,7 @@
 
         // ЕСТЬ ЛИ УЖЕ ЗАКАЗ НА ПОЛЬЗОВАТЕЛЯ
 
-        $sql = 'SELECT date, time FROM `orders` WHERE user_id = ?';
+        $sql = 'SELECT date, time, status FROM `orders` WHERE user_id = ?';
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s', $user_id);
         $stmt->execute();
@@ -69,14 +69,15 @@
             $currentDateTime = date('Y-m-d H:i:s', strtotime('-1 hour'));
 
             while ($tempVal = $result->fetch_assoc()) {
-                $row[] = array('date' => $tempVal['date'], 'time' => $tempVal['time']);
+                $row[] = array('date' => $tempVal['date'], 'time' => $tempVal['time'], 'status' => $tempVal['status']);
             }
 
             // Разбиение даты и времени, полученные из БД
 
             foreach ($row as $rows) {
+                $status = $rows['status'];
                 $dateTime = $rows['date'] . ' ' . $rows['time'];
-                if ($dateTime > $currentDateTime) {
+                if ($dateTime > $currentDateTime && $status === 'pending') {
                     $message = array(false, 'У Вас уже есть активный заказ на квест. Пожалуйста, повторите попытку позднее.');
                     sendToClient($message);
                     exit;
@@ -86,7 +87,7 @@
 
         // ЗАПРОС ДАТЫ
 
-        $sql = "SELECT date, time FROM `orders` WHERE date = ? AND time = ? AND quest_link = ?";
+        $sql = "SELECT date, time, status FROM `orders` WHERE date = ? AND time = ? AND quest_link = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sss', $day, $time, $quest);
         $stmt->execute();
@@ -95,9 +96,13 @@
         // ДАТА
 
         if ($result->num_rows > 0) {
-            $message = array(false, 'Запись на заданную дату или время уже имеется. Пожалуйста, выберите другое число и время и повторите попытку.');
-            sendToClient($message);
-            exit;            
+            $status = $row['status'];
+
+            if($status === 'pending') {
+                $message = array(false, 'Запись на заданную дату или время уже имеется. Пожалуйста, выберите другое число и время и повторите попытку.');
+                sendToClient($message);
+                exit; 
+            }    
         } else {
             $currentDate = date('Y-m-d'); // текущий месяц
             $currentDateLastDay = date('Y-m-t');
