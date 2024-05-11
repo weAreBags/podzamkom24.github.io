@@ -29,7 +29,8 @@ $(document).ready(function() {
                 $('.history__cancellation--block, .overlay--transparent').fadeIn('fast')
                 break
             case 'review':
-                alert(2)
+                $('.history__info--wrapper').css('display', 'none')
+                $('.history__info--block').animate({width: 850}, 200)
                 break
             default:
                 errorMessage = 'Указан неправильный индетификатор. Пожалуйста, перезагрузите страницу и повторите попытку.'

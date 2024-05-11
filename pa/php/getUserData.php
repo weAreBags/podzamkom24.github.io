@@ -1,7 +1,7 @@
 <?php
     $token = $_COOKIE['auth_token'];
 
-    $sql = 'SELECT user_id FROM `users` WHERE token = ?';
+    $sql = 'SELECT user_id, role_id FROM `users` WHERE token = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $token);
     $stmt->execute();
@@ -10,6 +10,7 @@
     if($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $user_id = $row['user_id'];
+        $role_id = $row['role_id'];
     }
 
 ?>

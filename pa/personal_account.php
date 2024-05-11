@@ -1,6 +1,7 @@
 <?php 
     require_once('php/db.php');
     require_once('php/check_au-token.php');
+    require_once('php/getUserData.php');
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +52,11 @@
         <a href="settings.php" class="nav__button--settings button--block noselect">НАСТРОЙКИ</a>
         <div class="nav__stroke"></div>
         <div class="nav__button--support button--block noselect">СВЯЗЬ С ПОДДЕРЖКОЙ</div>
-        <a href="admin.php" class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</a>
+        <?php
+            if($role_id > 1) {
+                echo '<a href="admin.php" class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</a>';
+            }
+        ?>
         <div class="nav__button--logout button--block noselect" id="logout">ВЫХОД</div>
     </dialog>
 

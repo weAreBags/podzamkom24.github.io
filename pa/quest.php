@@ -1,6 +1,7 @@
 <?php 
     require_once('php/db.php');
     require_once('php/check_au-token.php');
+    require_once('php/getUserData.php');
 
     // ПОЛУЧЕНИЕ НОМЕРА ПОЛЬЗОВАТЕЛЯ
 
@@ -88,8 +89,8 @@
             
             $lightStars = '';
             $darkStars = '';
-            $lightStarImg = '<img src="img/quests_order/stars.png" alt="stars">';
-            $darkStarImg = '<img src="img/quests_order/1star.png" alt="1star">';
+            $starActive = '<i class="fa-solid fa-star star__style--active"></i>';
+            $starDisabled = '<i class="fa-regular fa-star star__style--disabled"></i>';
 
             if($result->num_rows > 0) {                
                 $rows = $result->fetch_all(MYSQLI_ASSOC);
@@ -176,7 +177,11 @@
         <a href="settings.php" class="nav__button--settings button--block noselect">НАСТРОЙКИ</a>
         <div class="nav__stroke"></div>
         <div class="nav__button--support button--block noselect">СВЯЗЬ С ПОДДЕРЖКОЙ</div>
-        <a href="admin.php" class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</a>
+        <?php
+            if($role_id > 1) {
+                echo '<a href="admin.php" class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</a>';
+            }
+        ?>
         <div class="nav__button--logout button--block noselect" id="logout">ВЫХОД</div>
     </dialog>
     
@@ -194,8 +199,8 @@
                             <div class="quest__rating--text">РЕЙТИНГ: </div>
                             <div class="quest__rating--stars">
                                 <?php 
-                                    echo starsGenerate($rating, $lightStars, $lightStarImg);
-                                    echo starsGenerate($remains, $darkStars, $darkStarImg);
+                                    echo starsGenerate($rating, $lightStars, $starActive);
+                                    echo starsGenerate($remains, $darkStars, $starDisabled);
                                 ?>
                             </div>
                             <div class="quest__rating--total">(ВСЕГО ОЦЕНОК: <?php echo $count; ?>)</div>

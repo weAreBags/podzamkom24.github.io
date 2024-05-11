@@ -43,11 +43,9 @@
     position: absolute
     top: 50%
     transform: translateY(-50%)
-    display: none // flex
-    align-items: center
-    flex-direction: column
+    display: block
     background-color: #1D1D1D
-    width: 470px
+    width: 650px // 470px
     height: 540px
     border: 1px solid #878787
     border-radius: 35px
@@ -69,27 +67,55 @@
         &:hover
             color: #ff3a3a
             transition: .3s all
-    .history__info--quest
-        padding-top: 30px
-        font-size: 36px
-        font-weight: 700
-    .history__info--date
-        font-size: 18px
-    .history__info--stroke
+    .history__stroke
         width: 300px
         height: 1px
         background-color: #696969
         margin: 20px auto
-    .history__info--element
-        margin-bottom: 10px
-        &:last-child
-            margin: 0
-    .history__button--wrapper
-        margin-top: 10px
-        .history__button--cancel
-            border: 4px solid #ff3f3f
-        .history__button--review
-            border: 4px solid #FF8A00
+    .history__info--wrapper
+        display: flex // flex
+        align-items: center
+        flex-direction: column
+        .history__info--quest
+            padding-top: 30px
+            font-size: 36px
+            font-weight: 700
+        .history__info--date
+            font-size: 18px
+        .history__info--element
+            margin-bottom: 10px
+            &:last-child
+                margin: 0
+        .history__button--wrapper
+            margin-top: 10px
+            .history__button--cancel
+                border: 4px solid #ff3f3f
+            .history__button--review
+                border: 4px solid #FF8A00
+
+    .history__review--wrapper
+        width: 500px
+        margin: 0 auto
+        .history__review--title
+            font-size: 36px
+            text-align: center
+        .history__review--content
+            width: 500px
+            height: 200px
+            resize: none
+            outline: none
+        .history__review--evaluation
+            display: flex
+            align-items: center
+            margin: 10px 0 60px 0
+            .history__evaluation--item
+                width: 25px
+                height: 25px
+                cursor: pointer
+        .history__button--wrapper
+            margin: 0 auto
+
+
 
 .history__cancellation--block
     position: absolute

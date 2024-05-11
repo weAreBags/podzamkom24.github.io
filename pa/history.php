@@ -1,7 +1,7 @@
 <?php 
     require_once('php/db.php');
     require_once('php/check_au-token.php');
-    require_once('php/getUserID.php');
+    require_once('php/getUserData.php');
 
 ?>
 
@@ -31,6 +31,7 @@
     <script src="js/overlays.js" defer></script>
     <script src="js/history/moreInfo.js" defer></script>
     <script src="js/history/buttonActivity.js" defer></script>
+    <script src="js/history/sendReview.js" defer></script>
 </head>
 
 <body>
@@ -59,7 +60,11 @@
         <div class="nav__button--settings button--block noselect">НАСТРОЙКИ</div>
         <div class="nav__stroke"></div>
         <div class="nav__button--support button--block noselect">СВЯЗЬ С ПОДДЕРЖКОЙ</div>
-        <div class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</div>
+        <?php
+            if($role_id > 1) {
+                echo '<a href="admin.php" class="nav__button--admin button--block noselect">АДМИН-ПАНЕЛЬ</a>';
+            }
+        ?>
         <div class="nav__button--logout button--block noselect" id="logout">ВЫХОД</div>
     </dialog>
 
@@ -73,27 +78,48 @@
 
     <dialog class="history__info--block close__modal">
         <div class="history__info--xmark"><i class="fa-solid fa-xmark"></i></div>
+        <!-- <div class="history__info--wrapper">
+            
 
-        <h2 class="history__info--quest">КВЕСТ: <span></span></h2>
-        <div class="history__info--date"><span></span></div>
+            <h2 class="history__info--quest">КВЕСТ: <span></span></h2>
+            <div class="history__info--date"><span></span></div>
 
-        <div class="history__info--stroke"></div>
+            <div class="history__info--stroke history__stroke"></div>
 
-        <div class="history__info--players history__info--element">КОЛИЧЕСТВО ИГРОКОВ: <span></span></div>
-        <div class="history__info--age history__info--element">ВОЗРАСТ: <span></span></div>
-        <div class="history__info--actors history__info--element">НАЛИЧИЕ АКТЁРОВ: <span></span></div>
-        <div class="history__info--status history__info--element">СТАТУС: <span></span></div>
+            <div class="history__info--players history__info--element">КОЛИЧЕСТВО ИГРОКОВ: <span></span></div>
+            <div class="history__info--age history__info--element">ВОЗРАСТ: <span></span></div>
+            <div class="history__info--actors history__info--element">НАЛИЧИЕ АКТЁРОВ: <span></span></div>
+            <div class="history__info--status history__info--element">СТАТУС: <span></span></div>
 
-        <div class="history__info--stroke"></div>
+            <div class="history__info--stroke"></div>
 
-        <div class="history__info--code" data-code="">КОД ЗАКАЗА: <span></span></div>
+            <div class="history__info--code" data-code="">КОД ЗАКАЗА: <span></span></div>
 
-        <div class="history__info--stroke"></div>
+            <div class="history__info--stroke"></div>
 
-        <div class="button__wrapper history__button--wrapper">
-            <div class="button__wrapper--text history__button--text"></div>
-            <div class="button__wrapper--blur history__button--activity"></div>
-        </div>
+            <div class="button__wrapper history__button--wrapper">
+                <div class="button__wrapper--text history__button--text"></div>
+                <button class="button__wrapper--blur history__button--activity"></button>
+            </div>
+        </div> -->
+
+        <form action="php/review_processing.php" method="POST" class="history__review--wrapper" id="send_review">
+            <div class="history__review--title">ОСТАВИТЬ ОТЗЫВ</div>
+            <div class="history__review--stroke history__stroke"></div>
+            <label for="history__review--content" class="label__style--default history__input--title history__title--review noselect">ВАШ ОТЗЫВ</label>
+            <textarea name="review" id="history__review--content" class="input__style--default history__review--content" minlength="10" maxlength="2500" required></textarea>
+            <div class="history__review--evaluation">
+                <i class="fa-regular fa-star star__style--disabled history__evaluation--item"></i>
+                <i class="fa-regular fa-star star__style--disabled history__evaluation--item"></i>
+                <i class="fa-regular fa-star star__style--disabled history__evaluation--item"></i>
+                <i class="fa-regular fa-star star__style--disabled history__evaluation--item"></i>
+                <i class="fa-regular fa-star star__style--disabled history__evaluation--item"></i>
+            </div>
+            <div class="button__wrapper history__button--wrapper">
+                <div class="button__wrapper--text">ОТПРАВИТЬ</div>
+                <button class="button__wrapper--blur history__button--review"></button>
+            </div>
+        </form>
     </dialog>
 
     <?php

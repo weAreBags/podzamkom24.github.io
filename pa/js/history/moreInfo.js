@@ -25,7 +25,7 @@ $(document).ready(function() {
                     switch (buttonActivity) {
                         case 'review':
                             $('.history__button--text').html('ОСТАВИТЬ ОТЗЫВ').addClass('history__button--review').removeClass('history__button--cancel')
-                            $('.history__button--activity').addClass('history__button--review').removeClass('history__button--cancel')
+                            $('.history__button--activity').addClass('history__button--review').removeClass('history__button--cancel').attr('id', 'review')
                             $('.history__button--wrapper').css('display', 'block')
                             $('.history__info--block').css('height', '540px')
                             break
@@ -50,7 +50,7 @@ $(document).ready(function() {
                     setData('code', '.history__info--code span')
                     $('.history__info--code').attr('data-code', responce.request['code'])
                     
-                    $('.history__info--block, .overlay').fadeIn('fast').css('display', 'flex')
+                    $('.history__info--block, .overlay').fadeIn('fast')
 
                     function setData(data, htmlClass) {
                         var text = responce.request[data]
